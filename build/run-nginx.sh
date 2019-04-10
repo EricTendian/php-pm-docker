@@ -11,6 +11,10 @@ fi
 [ ! -z "$ARG_STATIC" ] && STATIC="${STATIC}${ARG_STATIC}"
 sed -i "s#STATIC_DIRECTORY#${STATIC}#g" /etc/nginx/sites-enabled/default
 
+if [ ! -z "$PORT" ]; then
+  sed -i "s/listen 80;/listen ${PORT};/g" /etc/nginx/sites-enabled/default
+fi
+
 nginx
 
 mkdir -p /ppm/run
